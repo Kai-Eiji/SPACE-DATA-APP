@@ -5,6 +5,10 @@ import localImage from './images/space-man.jpg';
 function Apod (props){
     console.log(props.data);
 
+    const body = document.querySelector('body');
+    if(body.classList.contains('mars')){ body.classList.remove('mars') }
+    body.classList.add('space')
+
 
     const mainContent = () =>{
 
@@ -15,9 +19,14 @@ function Apod (props){
                     
                     return( <img src={props.data.hdurl} className='card-img-top' /> );
                 }
+
                 else if(props.data.url){
-                    return(<iframe title='video'  src={props.data.url}></iframe>);
+                    return(<div> 
+                                <iframe title='video' className='mb-3'  src={props.data.url}></iframe>
+                                <a className='video-link' href={props.data.url}>Link to this video</a>
+                            </div>);
                 }
+                
                 else{
                     return( <img src={localImage} className='card-img-top' /> );
                 }

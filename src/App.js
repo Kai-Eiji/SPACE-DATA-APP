@@ -22,8 +22,8 @@ class App extends Component{
         <div className='App'>
           <Navbar />
           
-            <Route exact path='/' component={PickDate} data={this.state}/>
-            <Route path='/Mars'component={Mars} />
+            <Route path='/' component={PickDate}/>
+            {/* <Route path='/Mars'component={Mars} /> */}
          
 
         </div>

@@ -5,9 +5,12 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-image: url('./components/images/nasa2.jpg');
   background-repeat: no-repeat;
   background-size: 100% 100%;
+}
+
+.space{
+  background-image: url('./components/images/nasa2.jpg');
 }
 
 .mars{
@@ -88,5 +91,10 @@ iframe{
 
 .navbar{
   opacity: 0.65;
+}
+
+.video-link{
+  margin-top: 150px;
+  margin-left: -210px;
 }
 

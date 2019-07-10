@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
-import Apod from '../components/Apod';
+import Apod from './Apod';
+import Mars from './Mars';
 import axios from 'axios';
 import dateFnsFormat from 'date-fns/format';
 import isWithinRange from 'date-fns/is_within_range'
@@ -37,8 +38,9 @@ class PickDate extends Component{
        
         const newDate = dateFnsFormat(day, 'YYYY-MM-DD')
         const validRange = isWithinRange( day , new Date(1995, 5, 20), this.state.today );
+        console.log(this.state.today);
         
-        if(newDate !== 'Invalid Date' && validRange){
+        if(newDate !== 'Invalid Date' && validRange ){
             const apiKey = 'O2yIUsVQtXM3Xaz6pC0Vj5mEeOJX6EKaEAe7rCug';     //'O2yIUsVQtXM3Xaz6pC0Vj5mEeOJX6EKaEAe7rCug'  'Xj7yCMxKSSaWL5j9KSjCMkCesdojZKdA9PC8N6G0'
             const url = "https://api.nasa.gov/planetary/apod?api_key=";
             const adress = url + apiKey;
@@ -47,8 +49,6 @@ class PickDate extends Component{
             axios.get(adress+dateReq)
                 .then( res => { this.setState({apodData: res.data}) } )
                 .catch(error => { console.log(error); this.setState({apodData:null}) })
-            
-            
         }
 
     }
@@ -58,19 +58,35 @@ class PickDate extends Component{
         
         document.body.style = this.state.backgroundImage;
 
-        return (
-            <div>
-                <div className='mt-3 ml-4 calender'>
-                    <p className='top-text'>Please enter a day:</p>
-                    <div className="ml-5">
-                        <DayPickerInput className='mt-5' onDayChange={ day => { this.handleDate(day); } }  />
+        if(this.props.location.pathname === '/'){
+            console.log('path name = /')
+                return (
+                    <div>
+                        <div className='mt-3 ml-4 calender'>
+                            <p className='top-text'>Please enter a day:</p>
+                            <div className="ml-5">
+                                <DayPickerInput className='mt-5' onDayChange={ day => { this.handleDate(day); } }  />
+                            </div>
+                        </div>
+                            <Apod  data={this.state.apodData}/>
                     </div>
-                    
+                );
+        }
+
+        else if(this.props.location.pathname === '/Mars'){
+            console.log('path name = /Mars')
+            return (
+                <div>
+                    <div className='mt-3 ml-4 calender'>
+                        <p className='top-text'>Please enter a day:</p>
+                        <div className="ml-5">
+                            <DayPickerInput className='mt-5' onDayChange={ day => { this.handleDate(day); } }  />
+                        </div>
+                    </div>
+                        <Mars  data={this.state.apodData}/>
                 </div>
-                
-                    <Apod  data={this.state.apodData}/>
-            </div>
-        );
+            );
+        }
     }
 
 }
