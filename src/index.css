@@ -1,0 +1,92 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-image: url('./components/images/nasa2.jpg');
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+}
+
+.mars{
+  background-image: url('./components/images/mars1.jpg');
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+
+.negative-margin{
+  margin-top: -40px;
+}
+
+.card.main{
+  max-width: 700px;
+  margin-left: 200px;
+}
+
+iframe{
+  max-width: 700px;
+  max-height: 500px;
+  margin-left: 200px;
+}
+
+
+.error-message{
+  position: absolute;
+  top: 20%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white
+}
+
+.navbar {
+  background-color:#4d0099;
+}
+
+.center{
+  position: absolute;
+  width: 100%;
+  left: 0;
+  text-align: left;
+  margin-left: 50px;
+}
+
+.right{
+  position: absolute;
+  width: 100%;
+  left: 0;
+  text-align: right;
+  margin-left: 50px;
+}
+
+.nav-link{
+  font-size: 20px;
+  margin-right: 10px;
+}
+
+.calender{
+  background-color: aliceblue;
+  opacity: 0.6;
+  margin-right: 1054px;
+  padding-bottom: 20px;
+  border-radius: 10px;
+}
+
+.DayPickerInput-OverlayWrapper{
+  margin-left: -48px;
+  border-radius: 25px;
+}
+
+.top-text{
+  margin-left: 67px;
+  margin-bottom: 5px;
+}
+
+.navbar{
+  opacity: 0.65;
+}
+
