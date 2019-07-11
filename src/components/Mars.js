@@ -12,6 +12,8 @@ function Mars (props){
                 isSelected: true,
                 caption: "After Rain (Jeshu John - designerspics.com)"
               }]
+
+     
     
   
 
@@ -23,6 +25,16 @@ function Mars (props){
         console.log(photos);
         console.log(photos[0]);
         console.log(photos[0].img_src);
+
+        let array = Array(photos.length).fill({
+          src: null,
+          thumbnail: null,
+          thumbnailWidth: 320,
+          thumbnailHeight: 174,
+          isSelected: true,
+          caption: "After Rain (Jeshu John - designerspics.com)"})
+  
+        console.log('array = ', array);
 
 
         
