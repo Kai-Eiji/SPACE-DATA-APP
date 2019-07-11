@@ -1,76 +1,73 @@
 import React from 'react'
-import localImage from './images/space-man.jpg';
+import Gallery from 'react-grid-gallery';
 
 
 function Mars (props){
+  
+      let IMAGES = [{
+                src: "https://c2.staticflickr.com/9/8817/28973449265_07e3aa5d2e_b.jpg",
+                thumbnail: "https://c2.staticflickr.com/9/8817/28973449265_07e3aa5d2e_n.jpg",
+                thumbnailWidth: 320,
+                thumbnailHeight: 174,
+                isSelected: true,
+                caption: "After Rain (Jeshu John - designerspics.com)"
+              }]
+
+     
+    
+  
+
+  
     console.log(props.data);
 
+    if(props.data){
+        const photos = Array(...props.data.photos);
+        console.log(photos);
+        console.log(photos[0]);
+        console.log(photos[0].img_src);
 
-    const mainContent = () =>{
+        let array = Array(photos.length).fill({
+          src: null,
+          thumbnail: null,
+          thumbnailWidth: 320,
+          thumbnailHeight: 174,
+          isSelected: true,
+          caption: "After Rain (Jeshu John - designerspics.com)"})
+  
+        console.log('array = ', array);
 
-        const body = document.querySelector('body');
-        body.classList.add('mars')
 
-        if(props.data){
         
-            const content = () =>{
-                if(props.data.hdurl){
-                    
-                    return( <img src={props.data.hdurl} className='card-img-top' /> );
-                }
-                
-                else if(props.data.url){
-                    return(<div> 
-                                <iframe title='video' className='mb-3'  src={props.data.url}></iframe>
-                                <a className='video-link' href={props.data.url}>Link to this video</a>
-                            </div>);
-                }
-                
-                else{
-                    return( <img src={localImage} className='card-img-top' /> );
-                }
-            }
-            
-            return(
-                
-                <div>
-                    <div className='card-tittle text-center mb-3 mt-2'>
-                        <h2>{props.data.title}</h2>
-                    </div>
-                    
-                    {content()}
-    
-                    <div className='card-body'>
-                        <div className='card-text'>
-                            <p>{props.data.explanation}</p>
-                        </div>
-                    </div>
-                </div> 
-            )
+          IMAGES = [{
+                    src: `${props.data.photos[0].img_src}`,
+                    thumbnail: "https://c2.staticflickr.com/9/8817/28973449265_07e3aa5d2e_b.jpg",
+                    thumbnailWidth: 320,
+                    thumbnailHeight: 212,
+                    isSelected: true,
+                    caption: "After Rain (Jeshu John - designerspics.com)"
+                  }]
+        
+          
         }
+        
+        
+        document.getElementById('example-0')
+
+  
+
+  
+
+  
+
+  
     
-        else{
-            return( <div>
-                        <img className='card-img-top' src={localImage} />
-                        <h3 className='error-message'>Data Not Available...</h3>
-                    </div>
-                );
-        }
+    return (
+      <div>
+          <Gallery images={IMAGES}/>
+      </div>
+    )
+  }
 
-    }
-    
-
-    return(
-        <div className='container'>
-            <h1 className='text-center negative-margin mb-5 text-white'>MARS DATA</h1>
-                <div className="card main mb-3 mt-3 polaroid ">
-
-                    {mainContent()}
-                    
-                </div>
-        </div>
-    );
-}
 
 export default Mars;
 

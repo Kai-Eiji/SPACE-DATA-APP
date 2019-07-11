@@ -8,10 +8,10 @@ import Navbar from './components/Navbar';
 class App extends Component{
 
   constructor(props){
-    const Background = './components/images/nasa2.jpg';
+    
     super(props);
     this.state = {
-      spaceBack: `url(${Background})`
+      
     }
   }
 
