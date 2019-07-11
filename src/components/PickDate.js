@@ -13,20 +13,20 @@ class PickDate extends Component{
     constructor(props){
         super(props);
         console.log(props);
-        const Background = './images/nasa2.jpg';
+        
         this.state = {
             apodData:null,
-            defaultData:null,
+            marsData: null,
             today: new Date(),
-            backgroundImage: `url(${Background})`
+            apiKey : 'O2yIUsVQtXM3Xaz6pC0Vj5mEeOJX6EKaEAe7rCug',     //'O2yIUsVQtXM3Xaz6pC0Vj5mEeOJX6EKaEAe7rCug'  'Xj7yCMxKSSaWL5j9KSjCMkCesdojZKdA9PC8N6G0'
+            apodUrl : 'https://api.nasa.gov/planetary/apod?api_key=',
+            marsUrl : 'https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?'
         }
     }
 
     componentDidMount(){
   
-        const apiKey = 'O2yIUsVQtXM3Xaz6pC0Vj5mEeOJX6EKaEAe7rCug';     //'O2yIUsVQtXM3Xaz6pC0Vj5mEeOJX6EKaEAe7rCug'  'Xj7yCMxKSSaWL5j9KSjCMkCesdojZKdA9PC8N6G0'
-        const url = "https://api.nasa.gov/planetary/apod?api_key=";
-        const adress = url + apiKey;
+        const adress = this.state.apodUrl + this.state.apiKey;
           
         axios.get(adress)
             .then( res => { this.setState({apodData: res.data}) } )
@@ -34,16 +34,14 @@ class PickDate extends Component{
         }
     
 
-    handleDate = (day) =>{
+    handleDateApod = (day) =>{
        
         const newDate = dateFnsFormat(day, 'YYYY-MM-DD')
         const validRange = isWithinRange( day , new Date(1995, 5, 20), this.state.today );
         console.log(this.state.today);
         
         if(newDate !== 'Invalid Date' && validRange ){
-            const apiKey = 'O2yIUsVQtXM3Xaz6pC0Vj5mEeOJX6EKaEAe7rCug';     //'O2yIUsVQtXM3Xaz6pC0Vj5mEeOJX6EKaEAe7rCug'  'Xj7yCMxKSSaWL5j9KSjCMkCesdojZKdA9PC8N6G0'
-            const url = "https://api.nasa.gov/planetary/apod?api_key=";
-            const adress = url + apiKey;
+            const adress = this.state.apodUrl + this.state.apiKey;
             const dateReq = `&date=${newDate}`
             
             axios.get(adress+dateReq)
@@ -53,10 +51,28 @@ class PickDate extends Component{
 
     }
 
+//earth_date=2015-6-3&api_key=DEMO_KEY'
+
+    handleDateMars = (day) =>{
+       
+        const newDate = dateFnsFormat(day, 'YYYY-MM-DD')
+        const dateReq = `&earth_date=${newDate}`
+        const apiKey = `&api_key=${this.state.apiKey}`
+        
+        const adress = this.state.marsUrl + dateReq + apiKey
+
+            axios.get(adress)
+                .then( res => { this.setState({marsData: res.data}) } )
+                .catch(error => { console.log(error); this.setState({marsData:null}) })
+        
+    }
+
+
+
+
     render(){
         console.log(this.state.apodData);
         
-        document.body.style = this.state.backgroundImage;
 
         if(this.props.location.pathname === '/'){
             console.log('path name = /')
@@ -65,7 +81,7 @@ class PickDate extends Component{
                         <div className='mt-3 ml-4 calender'>
                             <p className='top-text'>Please enter a day:</p>
                             <div className="ml-5">
-                                <DayPickerInput className='mt-5' onDayChange={ day => { this.handleDate(day); } }  />
+                                <DayPickerInput className='mt-5' onDayChange={ day => { this.handleDateApod(day); } }  />
                             </div>
                         </div>
                             <Apod  data={this.state.apodData}/>
@@ -80,10 +96,10 @@ class PickDate extends Component{
                     <div className='mt-3 ml-4 calender'>
                         <p className='top-text'>Please enter a day:</p>
                         <div className="ml-5">
-                            <DayPickerInput className='mt-5' onDayChange={ day => { this.handleDate(day); } }  />
+                            <DayPickerInput className='mt-5' onDayChange={ day => { this.handleDateMars(day); } }  />
                         </div>
                     </div>
-                        <Mars  data={this.state.apodData}/>
+                        <Mars  data={this.state.marsData}/>
                 </div>
             );
         }
