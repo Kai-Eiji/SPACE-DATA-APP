@@ -15,6 +15,8 @@ body {
 
 .mars{
   background-image: url('./components/images/mars1.jpg');
+  background-size: 100% 625px;
+  background-repeat: repeat;
 }
 
 code {
@@ -96,5 +98,18 @@ iframe{
 .video-link{
   margin-top: 150px;
   margin-left: -210px;
+}
+
+.ReactGridGallery{
+  margin-left: 70px;
+}
+
+.ReactGridGallery_tile{
+  margin: 20px !important;
+  z-index: -1;
+}
+
+.ReactGridGallery_tile-viewport{
+  margin: 5px !important;
 }
 
