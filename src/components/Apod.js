@@ -3,20 +3,17 @@ import localImage from './images/space-man.jpg';
 
 
 function Apod (props){
-    console.log(props.data);
-
+    let date = null;
     const body = document.querySelector('body');
     if(body.classList.contains('mars')){ body.classList.remove('mars') }
     body.classList.add('space')
 
+    if(props.data){ date = props.data.date }
 
     const mainContent = () =>{
-
         if(props.data){
-        
             const content = () =>{
                 if(props.data.hdurl){
-                    
                     return( <img src={props.data.hdurl} className='card-img-top' /> );
                 }
 
@@ -63,7 +60,7 @@ function Apod (props){
 
     return(
         <div className='container'>
-            <h1 className='text-center negative-margin mb-5 text-white'>APOD DATA</h1>
+            <h1 className='text-center negative-margin mb-5 text-white'>APOD DATA {date}</h1>
                 <div className="card main mb-3 mt-3 polaroid ">
 
                     {mainContent()}
